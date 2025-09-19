@@ -107,8 +107,6 @@ for k=1:length(main_file_list)
                         len = 30 ;                   % Length of structuring element
                         bottomHatResults = zeros(size(testImage, 1), size(testImage, 2), length(angles));
 
-                        gauss_image=imgaussfilt(testImage);
-
                         %Apply bottom-hat transform with linear SE at multiple angles
                         for j = 1:length(angles)
                             angle = angles(j);
@@ -147,7 +145,8 @@ for k=1:length(main_file_list)
                             vesselCounts_hyth_ves(i) = CC_hyth_ves.NumObjects;
                             squeezed_region=squeeze(cat(3,region.Area));
                             sum_con1_ves(i)=sum(squeezed_region);%sum of white pixels from all regions
-                            sum_con2_ves(i)=sum(squeezed_region((squeezed_region>400)));%&(squeezed_region<1200)));                        sum_hyth_ves(i)=sum(hyth_ves(:));
+                            sum_con2_ves(i)=sum(squeezed_region((squeezed_region>400)));%&(squeezed_region<1200)));                        
+                            sum_hyth_ves(i)=sum(hyth_ves(:));
                             sum_hyth_ves(i)=sum(hyth_ves(:));
                             func2(i)=sum_con2_ves(i)/vesselCounts_hyth_ves(i);
                         %end
@@ -460,4 +459,5 @@ end
 % if ~isempty(output_data)
 %     output_data_excel = [existing_data; output_data];  % Add new rows after existing data
 %     writecell(output_data_excel, output_excel_path);
+
 % end
